@@ -1,0 +1,257 @@
+{
+  "type": "FeatureCollection",
+  "name": "8 東中野～上高田コース（中級）／Higashi-Nakano -   Kamitakada Course (Intermediate)",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "スタート／Start",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6838129, 35.7066344, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "東中野駅／Higashi-Nakano Sta.",
+        "description": "<img src=\"https://lh5.googleusercontent.com/Z6Jv5RO5l0q2vY2Zs06fsUNvGQQEofsLFlCxW2qP6xoTw5lUzUd7hb6NFnLlwWTuMEtPEnsF68hP801j8Q9KAnpYEGClWWR3T_6YEUHH6serdNGUo8oB_HJE83l0TqQ\" height=\"200\" width=\"auto\" /><br><br>",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh5.googleusercontent.com/Z6Jv5RO5l0q2vY2Zs06fsUNvGQQEofsLFlCxW2qP6xoTw5lUzUd7hb6NFnLlwWTuMEtPEnsF68hP801j8Q9KAnpYEGClWWR3T_6YEUHH6serdNGUo8oB_HJE83l0TqQ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6838397, 35.7062206, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "上高田台公園／kamitakadadai park",
+        "description": "<img src=\"https://lh4.googleusercontent.com/IRPxOr8Tr1cwldYHNHXtVmWgdUTJrIKnu7OCnEbgHscmVwrY-GZlByw6_UY5WNeoL25k_QeKhZu6HUDrqWNLPAkNZ706yf96snjdJDZRwFIrTH5ktL6MLC1vcmO3VDA_\" height=\"200\" width=\"auto\" /><br><br>ターザンロープのついた大きな木製遊具のある広場があります。This park has an open area and large wooden playground equipment with a Tarzan rope.",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh4.googleusercontent.com/IRPxOr8Tr1cwldYHNHXtVmWgdUTJrIKnu7OCnEbgHscmVwrY-GZlByw6_UY5WNeoL25k_QeKhZu6HUDrqWNLPAkNZ706yf96snjdJDZRwFIrTH5ktL6MLC1vcmO3VDA_"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6784645, 35.7132727, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "「たきび」の歌発祥の地／Birthplace of “Takibi no uta” (Bonfire Song)\n",
+        "description": "<img src=\"https://lh6.googleusercontent.com/KYxvEz4LLK4I2tdCGVpst_TH2WUY8BZdb6ASZoC-fRAwm-k3gxmZ3GB95uw6FeTAsIKZDTknUZ9QUJHvY31h4Q5MSEM6CcEOyPZT0p0-qrAlq_X2n3cWADtA5n0vxA\" height=\"200\" width=\"auto\" /><br><br>西武鉄道新宿線新井薬師前駅の南、上高田3丁目にひときわ目立つ竹の垣根が続くお屋敷があります。ここが「たきび」の歌の発祥地で、「かきねの かきねの まがりかど」という歌詞そのままの世界が残っています。作詞した巽聖歌（たつみせいか）がこの付近に住み、近隣を散歩しながら作詞したと考えられています。／In 3-chome of Kamitakada on the south side of Araiyakushi-mae Station, which is on the Seibu Railway Shinjuku Line, there is a residence with a long bamboo fence that stands out. This area is the birthplace of “Takibi no uta” (Bonfire Song) and the verse “kakineno kakineno magarikado” remains as it was when the song was written. It is believed that the writer of the song, Seika Tatsumi, was walking in the neighborhood while he wrote the song.",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh6.googleusercontent.com/KYxvEz4LLK4I2tdCGVpst_TH2WUY8BZdb6ASZoC-fRAwm-k3gxmZ3GB95uw6FeTAsIKZDTknUZ9QUJHvY31h4Q5MSEM6CcEOyPZT0p0-qrAlq_X2n3cWADtA5n0vxA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6744412, 35.7141536, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "桜ケ池不動尊／Sakuragaike Fudoson Temple",
+        "description": "<img src=\"https://lh5.googleusercontent.com/sJiEyt_m5yvG2BkzHYXT-Diwbk3ZAzl25n5YzgxG3FIcbrjOGCGEfFE7QKlau-xh0hCJsecOVWjEp5BP_GzuAPy9FigZtPxZavXGsb9SSqkuO61_LzTYKlfo5g7emZ0\" height=\"200\" width=\"auto\" /><br><br>古くから湧出する清水と不動様で、村人たちに大切に守られてきました。／This temple has lovingly protected the villagers with its spring water and guardian diety Acala since ancient times.",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh5.googleusercontent.com/sJiEyt_m5yvG2BkzHYXT-Diwbk3ZAzl25n5YzgxG3FIcbrjOGCGEfFE7QKlau-xh0hCJsecOVWjEp5BP_GzuAPy9FigZtPxZavXGsb9SSqkuO61_LzTYKlfo5g7emZ0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6771047, 35.7147906, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "東光寺／Toko Temple",
+        "description": "<img src=\"https://lh4.googleusercontent.com/FnvXZyqY-H_cX_l0C0_YxqKplfue5449Wicn_xdIdIxc6ozwTqifMfB1GRY5vwsuy-w1d0oiE5ItB7L6p8sIArS7qLQL-JtvUEAuMc4JkbCkPPNTWa736aOrc3hUfGs\" height=\"200\" width=\"auto\" /><br><br>上高田の農民の菩提寺として、江戸初期に創建されたと伝えられる寺院です。／A temple that is believed to be built at the beginning of the Edo period as a family temple for  Kamitakada farmers.",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh4.googleusercontent.com/FnvXZyqY-H_cX_l0C0_YxqKplfue5449Wicn_xdIdIxc6ozwTqifMfB1GRY5vwsuy-w1d0oiE5ItB7L6p8sIArS7qLQL-JtvUEAuMc4JkbCkPPNTWa736aOrc3hUfGs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6765387, 35.7174322, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "新井薬師前駅／Araiyakushi-mae Sta",
+        "description": "<img src=\"https://lh4.googleusercontent.com/A_kq-8RqE0d6_BzmyUYzs8pF_AHzLfAeX9vzm4uhTSVdJs2Jvwdz3YcPQhQqfQZw0glObAAUAjr2GKLI0jDBVUD42UbKSaxDMwTR7nrFtUERbSmMgHM_bJlHmDgb-Lw\" height=\"200\" width=\"auto\" /><br><br>",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "gx_media_links": "https://lh4.googleusercontent.com/A_kq-8RqE0d6_BzmyUYzs8pF_AHzLfAeX9vzm4uhTSVdJs2Jvwdz3YcPQhQqfQZw0glObAAUAjr2GKLI0jDBVUD42UbKSaxDMwTR7nrFtUERbSmMgHM_bJlHmDgb-Lw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6725449, 35.7158141, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "ゴール／Goal",
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6713808, 35.7162257, 0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "コース／Route",
+        "tessellate": 1,
+        "extrude": 0,
+        "visibility": -1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [139.6771744, 35.7128807, 0],
+          [139.6773018, 35.7136015, 0],
+          [139.6773715, 35.7140491, 0],
+          [139.6774533, 35.7145314, 0],
+          [139.6774574, 35.7146044, 0],
+          [139.6775767, 35.7154374, 0],
+          [139.6776599, 35.715959, 0],
+          [139.6777806, 35.7167146, 0],
+          [139.6776693, 35.7167255, 0],
+          [139.6769236, 35.71678, 0],
+          [139.6768606, 35.7167941, 0],
+          [139.6761793, 35.716842, 0],
+          [139.6760103, 35.716057, 0],
+          [139.6753733, 35.7159644, 0],
+          [139.6752097, 35.7159579, 0],
+          [139.6751346, 35.7159394, 0],
+          [139.6747336, 35.7159143, 0],
+          [139.674291, 35.7158871, 0],
+          [139.6741971, 35.715874, 0],
+          [139.6738015, 35.7157967, 0],
+          [139.6735923, 35.7157499, 0],
+          [139.6735494, 35.7157477, 0],
+          [139.6734421, 35.7157586, 0],
+          [139.6734408, 35.715849, 0],
+          [139.6728949, 35.7159219, 0],
+          [139.6725637, 35.7159807, 0],
+          [139.6724108, 35.7160319, 0],
+          [139.6722096, 35.716119, 0],
+          [139.6717791, 35.7163346, 0],
+          [139.6716182, 35.7161713, 0],
+          [139.6717684, 35.716082, 0]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "コース／Route",
+        "tessellate": 1,
+        "extrude": 0,
+        "visibility": -1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [139.6836741, 35.7062424, 0],
+          [139.68367, 35.7064487, 0],
+          [139.6831443, 35.7065985, 0],
+          [139.6829861, 35.7066448, 0],
+          [139.6827192, 35.7067172, 0],
+          [139.6826012, 35.7069328, 0],
+          [139.6825321, 35.7070646, 0],
+          [139.6824718, 35.707149, 0],
+          [139.6824013, 35.7072682, 0],
+          [139.68229, 35.7074435, 0],
+          [139.6822545, 35.7075089, 0],
+          [139.6821774, 35.7076368, 0],
+          [139.682172, 35.7076984, 0],
+          [139.6821566, 35.7078666, 0],
+          [139.6821197, 35.7081029, 0],
+          [139.6820325, 35.7082668, 0],
+          [139.6819615, 35.7083512, 0],
+          [139.6818153, 35.7084819, 0],
+          [139.6816999, 35.7085886, 0],
+          [139.6815994, 35.7086757, 0],
+          [139.6814485, 35.7088342, 0],
+          [139.6813352, 35.7089545, 0],
+          [139.6811213, 35.7091919, 0],
+          [139.6810535, 35.7092643, 0],
+          [139.6809483, 35.7093982, 0],
+          [139.6806807, 35.7098229, 0],
+          [139.68044, 35.7102101, 0],
+          [139.6802837, 35.7104621, 0],
+          [139.6802013, 35.7105727, 0],
+          [139.6800591, 35.7107338, 0],
+          [139.6799807, 35.7108161, 0],
+          [139.6798311, 35.7109451, 0],
+          [139.6797205, 35.7110284, 0],
+          [139.6795032, 35.7111809, 0],
+          [139.6793557, 35.7112544, 0],
+          [139.6789044, 35.7115152, 0],
+          [139.6793658, 35.7119921, 0],
+          [139.6793751, 35.7120389, 0],
+          [139.6795267, 35.7125257, 0],
+          [139.6795495, 35.712566, 0],
+          [139.6795924, 35.7127053, 0],
+          [139.6795951, 35.7127369, 0],
+          [139.6797091, 35.7131061, 0],
+          [139.6793121, 35.7132542, 0],
+          [139.6791807, 35.7132879, 0],
+          [139.678946, 35.7133576, 0],
+          [139.6788172, 35.7133761, 0],
+          [139.6787193, 35.7133816, 0],
+          [139.6786322, 35.7133794, 0],
+          [139.678541, 35.7133826, 0],
+          [139.6784538, 35.7133957, 0],
+          [139.6783599, 35.7134208, 0],
+          [139.6782915, 35.713314, 0],
+          [139.6782741, 35.7132683, 0],
+          [139.6779563, 35.7127935, 0],
+          [139.677912, 35.7128033, 0],
+          [139.6771744, 35.7128807, 0],
+          [139.6771194, 35.7125268, 0],
+          [139.6770684, 35.7125159, 0],
+          [139.6768619, 35.7126705, 0],
+          [139.6766151, 35.7129046, 0],
+          [139.6765159, 35.7129983, 0],
+          [139.6764985, 35.7130429, 0],
+          [139.6761471, 35.7134676, 0],
+          [139.6757434, 35.7140044, 0],
+          [139.6755503, 35.7142549, 0],
+          [139.6754645, 35.7142603, 0],
+          [139.6752003, 35.7143028, 0],
+          [139.6748556, 35.7143452, 0],
+          [139.6744855, 35.7143735, 0],
+          [139.6744855, 35.7141177, 0],
+          [139.6744895, 35.7140425, 0]
+        ]
+      }
+    }
+  ]
+}

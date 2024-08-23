@@ -13,16 +13,27 @@ export default async function ProtectedPage() {
   const { data: geojson_data, error } = await supabase
     .from("geojson_data")
     .select("geo_json");
-  console.log("geo_json", geojson_data);
+  // console.log("geo_json", geojson_data);
 
   if (error) {
     console.error("Error fetching data:", error);
     // エラー処理をここに追加
   }
 
+  //profilesテーブルにuser_idが存在するか確認
+  const { data: profiles, error: profilesError } = await supabase
+    .from("profiles")
+    .select("id");
+  console.log("profiles", profiles);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  //uuidがprofilesテーブルするか否かを判定
+  const isProfileExist = profiles?.some((profile) => profile.id === user?.id);
+
+  console.log("isProfileExist", isProfileExist);
 
   if (!user) {
     return redirect("/login");
@@ -46,7 +57,7 @@ export default async function ProtectedPage() {
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
         <Header />
         <main className="flex-1 flex flex-col gap-6">
-          <InputName user={user} />
+          <InputName user={user} isProfileExist={isProfileExist} />
           <GoogleMap geojson_data={geojson_data} />
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           <FetchDataSteps />

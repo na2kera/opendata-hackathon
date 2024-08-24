@@ -13,14 +13,55 @@ type Props = {
 
 const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
   const supabase = createClient();
-
+  const DISTANCE = 50;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(false); // ローディング状態を管理するステート
+  const [currentDistance, setCurrentDistance] = useState(false);
+
+  function getCurrentPositionAsync() {
+    return new Promise<{ lat: number, lng: number }>((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            resolve({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          (error) => reject(error),
+          {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+          }
+        );
+      } else {
+        reject(new Error("Geolocation is not supported by this browser."));
+      }
+    });
+  }
+
+function calcDistance(feature: any, currentLocation: any) {
+    const coordinates = feature.getGeometry().get();
+    const lat = coordinates.lat();
+    const lng = coordinates.lng();
+
+
+    const abs_lat = Math.abs(currentLocation.lat - lat);
+    const abs_lng = Math.abs(currentLocation.lng - lng);
+      //メートル換算処理
+    const latDistance = abs_lat * 111320;
+    const lngDistance = abs_lng * 111320 * Math.cos(currentLocation.lat * (Math.PI / 180));
+
+    const distance = Math.sqrt(latDistance ** 2 + lngDistance ** 2);
+
+    return distance;
+}
 
   useEffect(() => {
-    const initMap = () => {
-      const map = new (window as any).google.maps.Map(
+    const initMap = async () => {
+      const mapInstance = new (window as any).google.maps.Map(
         document.getElementById("map"),
         {
           center: {
@@ -31,9 +72,8 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
         }
       );
 
-      // GeoJSONデータを地図に追加
-      if (geojson_data && geojson_data && geojson_data.geo_json) {
-        map.data.addGeoJson(geojson_data.geo_json);
+      if (geojson_data && geojson_data.geo_json) {
+        mapInstance.data.addGeoJson(geojson_data.geo_json);
       }
 
       // アイコンの色を設定する関数
@@ -43,31 +83,43 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
           url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`,
         };
       };
-      map.data.setStyle({
-        icon: getIcon("red"), // 初期色は青
+
+      mapInstance.data.setStyle({
+        icon: getIcon("red"),
       });
-      // ピンがクリックされたときのイベントリスナーを追加
-      map.data.addListener("click", (event: any) => {
-        const feature = event.feature;
-        const description = feature.getProperty("gx_media_links");
-        const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
-        const isClicked = feature.getProperty("clicked");
-        const title = feature.getProperty("title");
-        setTitle(title);
 
-        if (description) {
-          setModalImage(description); // モーダルに表示する画像を設定
-          setModalOpen(true); // モーダルを開く
+      mapInstance.data.addListener("click", async (event: any) => {
+        
+        setLoading(true); // ローディング状態をtrueに設定
+        try {
+            const feature = event.feature;
+            const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
+            const isClicked = feature.getProperty("clicked");
+            const title = feature.getProperty("title");
+            setTitle(title);
+            const currentLocation = await getCurrentPositionAsync();
+            const description = feature.getProperty("gx_media_links");
+            const distance = calcDistance(feature, currentLocation);
+
+            if(distance<DISTANCE){
+                setCurrentDistance(true);
+            }
+            console.log("Distance in meters:", distance);
+
+            if (description) {
+                setModalImage(description);
+                setModalOpen(true);
+            }
+            // マーカーの色を青に変更(ここは本当はスタンプが押された時の処理)
+          mapInstance.data.overrideStyle(feature, { icon: getIcon("blue") });
+        } catch (error) {
+          console.error("Error getting location", error);
+        } finally {
+          setLoading(false); // ローディング状態をfalseに設定
         }
-
-        // if (isClicked) {
-        map.data.overrideStyle(feature, { icon: getIcon("blue") }); // ここはgeojsonから取得する必要あり
-
-        // }
       });
     };
 
-    // Google Maps APIがロード済みかチェック
     if ((window as any).google && (window as any).google.maps) {
       initMap();
     } else {
@@ -132,6 +184,14 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
       />
       <div id="map" style={{ width: "100%", height: "600px" }}></div>
 
+      {loading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContent}>
+            位置情報を取得しています...
+          </div>
+        </div>
+      )}
+
       {modalOpen && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div
@@ -144,12 +204,15 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
               className={`${styles.modalImage} w-full h-auto max-h-[70vh] object-contain mb-4`}
             />
             <div className="flex justify-between items-center w-full">
-              <button
-                onClick={handleStamp}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 ease-in-out"
-              >
-                スタンプ取得！
-              </button>
+                {
+                    currentDistance ? (<button
+                        onClick={handleStamp}
+                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 ease-in-out"
+                    >
+                        スタンプ取得！
+                    </button>):(<p className="text-red-500">有効範囲外</p>)
+
+                }
               <button
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
                 onClick={closeModal}

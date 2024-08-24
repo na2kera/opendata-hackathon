@@ -1,8 +1,6 @@
 import DeployButton from "@/components/DeployButton";
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
-import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import GoogleMap from "@/components/GoogleMap";
 import InputName from "@/components/InputName";
@@ -54,13 +52,14 @@ export default async function ProtectedPage() {
         </nav>
       </div>
 
-      <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6">
-          <InputName user={user} isProfileExist={isProfileExist} />
-          {/* <GoogleMap geojson_data={geojson_data} /> */}
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          <FetchDataSteps />
+
+      <div className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="py-10">
+          <div className="space-y-8">
+            <InputName user={user} isProfileExist={isProfileExist} />
+               {/* <GoogleMap geojson_data={geojson_data} /> */}
+          </div>
+
         </main>
       </div>
 

@@ -1,6 +1,5 @@
 import DeployButton from "../components/DeployButton";
 import AuthButton from "../components/AuthButton";
-import Header from "@/components/Header";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Index() {
@@ -23,7 +22,6 @@ export default async function Index() {
       </nav>
 
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <Header />
         <main className="flex-1 flex flex-col gap-6">
           {!user && (
             <a

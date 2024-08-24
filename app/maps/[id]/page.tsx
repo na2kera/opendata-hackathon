@@ -7,31 +7,29 @@ export default async function MapPage({ params }: { params: { id: string } }) {
 
   const {
     data: { user },
-} = await supabase.auth.getUser();
+  } = await supabase.auth.getUser();
 
-if (!user) {
+  if (!user) {
     return redirect("/login");
-}
+  }
 
-//idに合致するデータを取得する
-const { data, error } = await supabase
-.from("geojson_data")
-.select("*")
-.eq("id", params.id);
-console.log("data", data);
+  //idに合致するデータを取得する
+  const { data, error } = await supabase
+    .from("geojson_data")
+    .select("*")
+    .eq("id", params.id);
+  console.log("data", data);
 
-if (error) {
+  if (error) {
     console.log("error", error);
-}
+  }
 
-return (
+  return (
     <>
       {data && data[0] && (
         <IndividualMap individual_geojson_data={data[0] as Course} />
-    )}
-    {data && data[0] && (
-    <GoogleMap geojson_data={data[0]} />
-    )}
+      )}
+      {data && data[0] && <GoogleMap geojson_data={data[0]} user={user} />}
     </>
   );
 }

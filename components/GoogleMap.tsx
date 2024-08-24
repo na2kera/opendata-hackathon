@@ -13,14 +13,14 @@ export default function GoogleMap({ geojson_data }: { geojson_data: any }) {
       const map = new (window as any).google.maps.Map(
         document.getElementById("map"),
         {
-          center: { lat: 35.722627, lng: 139.6399039 }, // Tokyo coordinates
-          zoom: 15,
+        center: { lat :geojson_data.geo_json.features[0].geometry.coordinates[1], lng: geojson_data.geo_json.features[0].geometry.coordinates[0] }, // Tokyo coordinates
+          zoom: 14,
         }
       );
 
       // GeoJSONデータを地図に追加
-      if (geojson_data && geojson_data[6] && geojson_data[6].geo_json) {
-        map.data.addGeoJson(geojson_data[6].geo_json);
+      if (geojson_data && geojson_data && geojson_data.geo_json) {
+        map.data.addGeoJson(geojson_data.geo_json);
       }
 
       // アイコンの色を設定する関数
@@ -47,7 +47,7 @@ export default function GoogleMap({ geojson_data }: { geojson_data: any }) {
 
         // if (isClicked) {
           map.data.overrideStyle(feature, { icon: getIcon("blue") }); // ここはgeojsonから取得する必要あり
-          
+
         // }
       });
     };
@@ -62,7 +62,7 @@ export default function GoogleMap({ geojson_data }: { geojson_data: any }) {
 
   const closeModal = () => {
     setModalOpen(false);
-    setModalImage(null);
+    setModalImage(undefined);
   };
 
   return (

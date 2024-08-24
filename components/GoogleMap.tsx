@@ -17,7 +17,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     // console.log(geojson_data.geo_json.features[0].properties.title);
     console.log(profileData)
   const supabase = createClient();
-  const DISTANCE = 500;
+  const DISTANCE = 4050;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
@@ -97,11 +97,9 @@ const getIcon = (color: string) => {
     
             if (matchingProfile) {
                 // 一致するtitleがあればアイコンを青に変更
-                setIsVisited(true);
                 return { icon: getIcon("blue") };
             } else {
                 // 一致しない場合はアイコンを赤に変更
-                setIsVisited(false);
                 return { icon: getIcon("red") };
             }
         });
@@ -132,6 +130,9 @@ const getIcon = (color: string) => {
             }
             if(distance<DISTANCE){
                 setCurrentDistance(true);
+            }
+            else{
+                setCurrentDistance(false);
             }
             console.log("Distance in meters:", distance);
 

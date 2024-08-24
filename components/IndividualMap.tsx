@@ -10,6 +10,7 @@ const IndividualMap: React.FC<Props> = ({ individual_geojson_data }) => {
     <>
       {individual_geojson_data && (
         <Typography variant="h4">{individual_geojson_data.title}</Typography>
+        
       )}
     </>
   );

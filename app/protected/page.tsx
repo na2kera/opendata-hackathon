@@ -58,7 +58,7 @@ export default async function ProtectedPage() {
         <Header />
         <main className="flex-1 flex flex-col gap-6">
           <InputName user={user} isProfileExist={isProfileExist} />
-          <GoogleMap geojson_data={geojson_data} />
+          {/* <GoogleMap geojson_data={geojson_data} /> */}
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           <FetchDataSteps />
         </main>

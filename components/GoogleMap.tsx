@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import styles from './GoogleMap.module.css'; // モーダルのスタイル用にCSSをインポート
 
+const DISTANCE = 50;
 export default function GoogleMap({ geojson_data }: { geojson_data: any }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
@@ -84,7 +85,7 @@ function calcDistance(feature: any, currentLocation: any) {
             const description = feature.getProperty("gx_media_links");
             const distance = calcDistance(feature, currentLocation);
 
-            if(distance<50){
+            if(distance<DISTANCE){
                 setCurrentDistance(true);
             }
             console.log("Distance in meters:", distance);

@@ -11,8 +11,10 @@ type Props = {
 };
 
 const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
+    // console.log(geojson_data.geo_json.features[0].properties.title);
+    console.log(profileData)
   const supabase = createClient();
-  const DISTANCE = 50;
+  const DISTANCE = 50000;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
@@ -71,21 +73,41 @@ function calcDistance(feature: any, currentLocation: any) {
         }
       );
 
-      if (geojson_data && geojson_data.geo_json) {
-        mapInstance.data.addGeoJson(geojson_data.geo_json);
-      }
-
-      // アイコンの色を設定する関数
-      //   https://www.single-life.tokyo/google-maps%EF%BC%88%E3%82%B0%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%9E%E3%83%83%E3%83%97%EF%BC%89%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3/
       const getIcon = (color: string) => {
         return {
           url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`,
         };
       };
 
-      mapInstance.data.setStyle({
-        icon: getIcon("red"),
-      });
+      if (geojson_data && geojson_data.geo_json) {
+
+        // まず、GeoJSONを地図に追加
+        mapInstance.data.addGeoJson(geojson_data.geo_json);
+    
+        // その後でスタイルを適用
+        
+        mapInstance.data.setStyle((feature) => {
+            const featureTitle = feature.getProperty('title');
+    
+            // profileDataのtitleと一致するかチェック
+            const matchingProfile = profileData.visited_pin_ids?.find(profile => profile === featureTitle);
+    
+            if (matchingProfile) {
+                // 一致するtitleがあればアイコンを青に変更
+                return { icon: getIcon("blue") };
+            } else {
+                // 一致しない場合はアイコンを赤に変更
+                return { icon: getIcon("red") };
+            }
+        });
+    }
+      
+      
+
+      // アイコンの色を設定する関数
+      //   https://www.single-life.tokyo/google-maps%EF%BC%88%E3%82%B0%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%9E%E3%83%83%E3%83%97%EF%BC%89%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3/
+   
+     
 
       mapInstance.data.addListener("click", async (event: any) => {
         
@@ -110,7 +132,7 @@ function calcDistance(feature: any, currentLocation: any) {
                 setModalOpen(true);
             }
             // マーカーの色を青に変更(ここは本当はスタンプが押された時の処理)
-          mapInstance.data.overrideStyle(feature, { icon: getIcon("blue") });
+        //   mapInstance.data.overrideStyle(feature, { icon: getIcon("blue") });
         } catch (error) {
           console.error("Error getting location", error);
         } finally {

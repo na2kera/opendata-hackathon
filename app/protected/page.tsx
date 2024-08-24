@@ -52,12 +52,14 @@ export default async function ProtectedPage() {
         </nav>
       </div>
 
+
       <div className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <main className="py-10">
           <div className="space-y-8">
             <InputName user={user} isProfileExist={isProfileExist} />
-            <GoogleMap geojson_data={geojson_data} />
+               {/* <GoogleMap geojson_data={geojson_data} /> */}
           </div>
+
         </main>
       </div>
 

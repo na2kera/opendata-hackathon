@@ -17,13 +17,13 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     // console.log(geojson_data.geo_json.features[0].properties.title);
     console.log(profileData)
   const supabase = createClient();
-  const DISTANCE = 50000;
+  const DISTANCE = 500;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false); // ローディング状態を管理するステート
   const [currentDistance, setCurrentDistance] = useState(false);
-  
+  const [isVisited, setIsVisited] = useState(false);
   function getCurrentPositionAsync() {
     return new Promise<{ lat: number, lng: number }>((resolve, reject) => {
       if (navigator.geolocation) {
@@ -97,9 +97,11 @@ const getIcon = (color: string) => {
     
             if (matchingProfile) {
                 // 一致するtitleがあればアイコンを青に変更
+                setIsVisited(true);
                 return { icon: getIcon("blue") };
             } else {
                 // 一致しない場合はアイコンを赤に変更
+                setIsVisited(false);
                 return { icon: getIcon("red") };
             }
         });
@@ -112,6 +114,8 @@ const getIcon = (color: string) => {
         setLoading(true); // ローディング状態をtrueに設定
         try {
             const feature = event.feature;
+
+            console.log("feature", feature.getProperty("title"));
             const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
             const isClicked = feature.getProperty("clicked");
             const title = feature.getProperty("title");
@@ -119,7 +123,13 @@ const getIcon = (color: string) => {
             const currentLocation = await getCurrentPositionAsync();
             const description = feature.getProperty("gx_media_links");
             const distance = calcDistance(feature, currentLocation);
-
+            const visited = profileData.visited_pin_ids?.find((visited) => visited === title);
+            if(visited){
+                setIsVisited(true);
+            }
+            else{
+                setIsVisited(false);
+            }
             if(distance<DISTANCE){
                 setCurrentDistance(true);
             }
@@ -213,14 +223,18 @@ const getIcon = (color: string) => {
               className={`${styles.modalImage} w-full h-auto max-h-[70vh] object-contain mb-4`}
             />
             <div className="flex justify-between items-center w-full">
-                {
-                    currentDistance ? (<button
-                        onClick={handleStamp}
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 ease-in-out"
+                {  isVisited ? (
+                    <p className="text-blue-500">スタンプ取得済み</p>
+                ) : currentDistance ? (
+                    <button
+                    onClick={handleStamp}
+                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 ease-in-out"
                     >
-                        スタンプ取得！
-                    </button>):(<p className="text-red-500">有効範囲外</p>)
-
+                    スタンプ取得！
+                    </button>
+                ) : (
+                    <p className="text-red-500">有効範囲外</p>
+                )
                 }
               <button
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition duration-300 ease-in-out"

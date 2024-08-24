@@ -19,6 +19,7 @@ type GeoJsonFeatureProperties = {
   extrude: number;
   visibility: number;
   gx_media_links?: string;
+  title?: string;
 };
 
 type GeoJsonFeature = {

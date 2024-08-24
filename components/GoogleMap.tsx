@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import styles from "./GoogleMap.module.css"; // モーダルのスタイル用にCSSをインポート
 import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
 
 type Props = {
   geojson_data: any;
-  user: User;
+  profileData: Profile;
 };
 
-const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
+const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
   const supabase = createClient();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -84,18 +83,6 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, user }) => {
   const handleStamp = async () => {
     console.log("スタンプ取得！");
     console.log(title);
-
-    // プロフィールデータを取得
-    const { data: profileData, error: profileError } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
-    if (profileError) {
-      console.error("プロフィール取得エラー:", profileError);
-      return;
-    }
 
     // 既存のvisited_pin_idsに新しいtitleを追加
     const updatedVisitedPinIds = [

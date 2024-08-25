@@ -17,7 +17,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     // console.log(geojson_data.geo_json.features[0].properties.title);
     console.log(profileData)
   const supabase = createClient();
-  const DISTANCE = 4050;
+  const DISTANCE = 4200;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
@@ -118,29 +118,27 @@ const getIcon = (color: string) => {
             const isClicked = feature.getProperty("clicked");
             const title = feature.getProperty("title");
             setTitle(title);
-            const currentLocation = await getCurrentPositionAsync();
             const description = feature.getProperty("gx_media_links");
-            const distance = calcDistance(feature, currentLocation);
-            const visited = profileData.visited_pin_ids?.find((visited) => visited === title);
-            if(visited){
+            if(profileData.visited_pin_ids?.find((visited) => visited === title)){
                 setIsVisited(true);
             }
             else{
                 setIsVisited(false);
+                const currentLocation = await getCurrentPositionAsync();
+                const distance = calcDistance(feature, currentLocation);
+                if(distance<DISTANCE){
+                    setCurrentDistance(true);
+                }
+                else{
+                    setCurrentDistance(false);
+                }
+                console.log("Distance in meters:", distance);
             }
-            if(distance<DISTANCE){
-                setCurrentDistance(true);
-            }
-            else{
-                setCurrentDistance(false);
-            }
-            console.log("Distance in meters:", distance);
-
             if (description) {
                 setModalImage(description);
                 setModalOpen(true);
             }
-            // マーカーの色を青に変更(ここは本当はスタンプが押された時の処理)
+
         //   mapInstance.data.overrideStyle(feature, { icon: getIcon("blue") });
         } catch (error) {
           console.error("Error getting location", error);
@@ -180,7 +178,6 @@ const getIcon = (color: string) => {
         visited_pin_ids: updatedVisitedPinIds,
       })
       .eq("id", profileData.id);
-
     if (error) {
       console.error("更新エラー:", error);
     } else {

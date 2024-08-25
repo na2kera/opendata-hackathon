@@ -12,6 +12,7 @@
     "@mui/material": "^5.16.7",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
+    "@types/google.maps": "^3.55.12",
     "autoprefixer": "10.4.17",
     "geist": "^1.2.1",
     "next": "latest",

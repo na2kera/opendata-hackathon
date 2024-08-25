@@ -89,7 +89,7 @@ const getIcon = (color: string) => {
     
         // その後でスタイルを適用
         
-        mapInstance.data.setStyle((feature) => {
+        mapInstance.data.setStyle((feature: google.maps.Data.Feature) => {
             const featureTitle = feature.getProperty('title');
     
             // profileDataのtitleと一致するかチェック

@@ -18,7 +18,7 @@ type GeoJsonFeatureProperties = {
   tessellate: number;
   extrude: number;
   visibility: number;
-  gx_media_links?: string;
+  gx_media_links?: string[];
   title?: string;
 };
 
@@ -48,4 +48,5 @@ type Course = {
   geo_json: GeoJson;
   title: string;
   ward: string;
+  total_pins: number;
 };

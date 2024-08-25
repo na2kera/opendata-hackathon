@@ -22,17 +22,18 @@ type Props = {
 
 const AllMaps: React.FC<Props> = ({ geojson_data }) => {
   return (
-    <>
-      <Typography variant="h4" mt={6} mb={2}>
-        All Maps
+    <Box
+      bgcolor={"white"}
+      display={"flex"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      flexDirection={"row"}
+      flexWrap={"wrap"}
+    >
+      <Typography variant="h5" mt={6} mb={2} color={"#16E5F2"}>
+        マップ一覧
       </Typography>
-      <Box
-        display={"flex"}
-        flexDirection={"row"}
-        flexWrap={"wrap"}
-        mx={7}
-        my={4}
-      >
+      <Box mx={5} my={4}>
         {geojson_data.map((data) => {
           return (
             <Link href={`/maps/${data.id}`}>
@@ -43,11 +44,8 @@ const AllMaps: React.FC<Props> = ({ geojson_data }) => {
                 margin={"8px"}
                 borderRadius={"16px"}
                 boxShadow={"0 4px 8px rgba(0,0,0,0.1)"}
-                width={"250px"}
-                height={"200px"}
-                sx={{
-                  backgroundColor: "white",
-                }}
+                minHeight={"170px"}
+                bgcolor={"#16E5F2"}
               >
                 <Typography variant="h6" sx={{ marginBottom: "8px" }}>
                   {data.title}
@@ -61,7 +59,7 @@ const AllMaps: React.FC<Props> = ({ geojson_data }) => {
           );
         })}
       </Box>
-    </>
+    </Box>
   );
 };
 

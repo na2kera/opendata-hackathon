@@ -41,10 +41,10 @@ export default async function MapPage({ params }: { params: { id: string } }) {
   return (
     <>
       {data && data[0] && (
-        <IndividualMap individual_geojson_data={data[0] as Course} />
-      )}
-      {data && data[0] && (
-        <GoogleMap geojson_data={data[0]} profileData={profileData} />
+        <>
+          <IndividualMap individual_geojson_data={data[0] as Course} />
+          <GoogleMap geojson_data={data[0]} profileData={profileData} />
+        </>
       )}
     </>
   );

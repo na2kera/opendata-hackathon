@@ -106,34 +106,34 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
       mapInstance.data.addListener("click", async (event: any) => {
         setLoading(true); // ローディング状態をtrueに設定
         try {
-            const feature = event.feature;
+          const feature = event.feature;
 
-            console.log("feature", feature.getProperty("title"));
-            const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
-            const isClicked = feature.getProperty("clicked");
-            const title = feature.getProperty("title");
-            setTitle(title);
-            const description = feature.getProperty("gx_media_links");
-            var index = 0 ;
-            if(profileData.visited_pin_ids?.find((visited) => visited === title)){
-                index = 1;
-                setIsVisited(true);
+          console.log("feature", feature.getProperty("title"));
+          const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
+          const isClicked = feature.getProperty("clicked");
+          const title = feature.getProperty("title");
+          setTitle(title);
+          const description = feature.getProperty("gx_media_links");
+          var index = 0;
+          if (
+            profileData.visited_pin_ids?.find((visited) => visited === title)
+          ) {
+            index = 1;
+            setIsVisited(true);
+          } else {
+            setIsVisited(false);
+            const currentLocation = await getCurrentPositionAsync();
+            const distance = calcDistance(feature, currentLocation);
+            if (distance < DISTANCE) {
+              setCurrentDistance(true);
+            } else {
+              setCurrentDistance(false);
             }
-            else{
-                setIsVisited(false);
-                const currentLocation = await getCurrentPositionAsync();
-                const distance = calcDistance(feature, currentLocation);
-                if(distance<DISTANCE){
-                    setCurrentDistance(true);
-                }
-                else{
-                    setCurrentDistance(false);
-                }
-                console.log("Distance in meters:", distance);
-            }
+            console.log("Distance in meters:", distance);
+
             if (description) {
-                setModalImage(description[index]);
-                setModalOpen(true);
+              setModalImage(description[index]);
+              setModalOpen(true);
             }
             console.log("Distance in meters:", distance);
           }

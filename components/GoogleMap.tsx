@@ -119,7 +119,9 @@ const getIcon = (color: string) => {
             const title = feature.getProperty("title");
             setTitle(title);
             const description = feature.getProperty("gx_media_links");
+            var index = 0 ;
             if(profileData.visited_pin_ids?.find((visited) => visited === title)){
+                index = 1;
                 setIsVisited(true);
             }
             else{
@@ -135,7 +137,7 @@ const getIcon = (color: string) => {
                 console.log("Distance in meters:", distance);
             }
             if (description) {
-                setModalImage(description);
+                setModalImage(description[index]);
                 setModalOpen(true);
             }
 

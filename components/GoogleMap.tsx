@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import styles from "./GoogleMap.module.css"; // モーダルのスタイル用にCSSをインポート
 import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 type Props = {
   geojson_data: any;
@@ -12,8 +13,10 @@ type Props = {
 const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
   // console.log(geojson_data.geo_json.features[0].properties.title);
   console.log(profileData);
+  const router = useRouter();
   const supabase = createClient();
   const DISTANCE = 50;
+  const [selectedFeature, setSelectedFeature] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
@@ -107,6 +110,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
         setLoading(true); // ローディング状態をtrueに設定
         try {
           const feature = event.feature;
+          setSelectedFeature(feature);
 
           console.log("feature", feature.getProperty("title"));
           const color = feature.getProperty("marker-color"); // `marlker-color` を `marker-color` に修正
@@ -150,14 +154,13 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     } else {
       (window as any).initMap = initMap;
     }
-  }, [geojson_data]);
+  }, [geojson_data, profileData]);
 
   const closeModal = () => {
     setModalOpen(false);
     setModalImage(undefined);
   };
 
-  // スタンプ取得ボタンを押したときの処理
   const handleStamp = async () => {
     console.log("スタンプ取得！");
     console.log(title);
@@ -177,11 +180,18 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
       .eq("id", profileData.id);
     if (error) {
       console.error("更新エラー:", error);
-    } else {
-      console.log("スタンプ取得成功！");
-      alert("スタンプ取得成功！");
-      window.location.reload();
+      return;
     }
+    alert("スタンプ取得成功！");
+    setIsVisited(true);
+    if (modalImage) {
+      const index = isVisited ? 0 : 1;
+      setModalImage((prevImage) => {
+        const description = selectedFeature.getProperty("gx_media_links");
+        return description ? description[index] : prevImage;
+      });
+    }
+    router.refresh();
   };
 
   return (

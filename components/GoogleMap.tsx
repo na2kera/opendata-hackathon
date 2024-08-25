@@ -17,7 +17,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     // console.log(geojson_data.geo_json.features[0].properties.title);
     console.log(profileData)
   const supabase = createClient();
-  const DISTANCE = 4200;
+  const DISTANCE = 50;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);

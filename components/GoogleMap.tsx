@@ -130,15 +130,9 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
               setCurrentDistance(false);
             }
             console.log("Distance in meters:", distance);
-
-            if (description) {
-              setModalImage(description[index]);
-              setModalOpen(true);
-            }
-            console.log("Distance in meters:", distance);
           }
           if (description) {
-            setModalImage(description);
+            setModalImage(description[index]);
             setModalOpen(true);
           }
 

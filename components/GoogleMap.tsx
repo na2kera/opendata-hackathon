@@ -25,37 +25,45 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
   const [isVisited, setIsVisited] = useState(false);
   function getCurrentPositionAsync() {
     return new Promise<{ lat: number; lng: number }>((resolve, reject) => {
-        navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
-            if (permissionStatus.state === 'denied') {
-              // 位置情報が拒否されている場合
-              alert("この機能を利用するには、位置情報の許可が必要です。ブラウザの設定で位置情報を許可してください。");
-              reject(new Error("Geolocation permission denied."));
-            } else {
-              // 位置情報の許可がある場合、または未定の場合
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                  (position) => {
-                    resolve({
-                      lat: position.coords.latitude,
-                      lng: position.coords.longitude,
-                    });
-                  },
-                  (error) => {
-                    if (error.code === error.PERMISSION_DENIED) {
-                      alert("位置情報の取得が許可されていません。位置情報を許可するか、ブラウザの設定を確認してください。");
-                    }
-                    reject(error);
-                  },
-                  {
-                    enableHighAccuracy: true,
-                    maximumAge: 0,
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((permissionStatus) => {
+          if (permissionStatus.state === "denied") {
+            // 位置情報が拒否されている場合
+            alert(
+              "この機能を利用するには、位置情報の許可が必要です。ブラウザの設定で位置情報を許可してください。"
+            );
+            reject(new Error("Geolocation permission denied."));
+          } else {
+            // 位置情報の許可がある場合、または未定の場合
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  resolve({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                  });
+                },
+                (error) => {
+                  if (error.code === error.PERMISSION_DENIED) {
+                    alert(
+                      "位置情報の取得が許可されていません。位置情報を許可するか、ブラウザの設定を確認してください。"
+                    );
                   }
-                );
-              } else {
-                reject(new Error("Geolocation is not supported by this browser."));
-              }
+                  reject(error);
+                },
+                {
+                  enableHighAccuracy: true,
+                  maximumAge: 0,
+                }
+              );
+            } else {
+              reject(
+                new Error("Geolocation is not supported by this browser.")
+              );
             }
-          });
+          }
+        });
     });
   }
 
@@ -184,6 +192,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
       ...(profileData.visited_pin_ids || []),
       title,
     ];
+    const description = selectedFeature.getProperty("gx_media_links");
 
     //profileのvisited_pin_idsにtitleを追加
     const { data, error } = await supabase
@@ -199,12 +208,9 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     alert("スタンプ取得成功！");
     setIsVisited(true);
     if (modalImage) {
-      const index = isVisited ? 0 : 1;
-      setModalImage((prevImage) => {
-        const description = selectedFeature.getProperty("gx_media_links");
-        return description ? description[index] : prevImage;
-      });
+      setModalImage(description[1]);
     }
+    setIsVisited(true);
     router.refresh();
   };
 

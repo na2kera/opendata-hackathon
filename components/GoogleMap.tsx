@@ -192,6 +192,7 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
       ...(profileData.visited_pin_ids || []),
       title,
     ];
+    const description = selectedFeature.getProperty("gx_media_links");
 
     //profileのvisited_pin_idsにtitleを追加
     const { data, error } = await supabase
@@ -207,12 +208,9 @@ const GoogleMap: React.FC<Props> = ({ geojson_data, profileData }) => {
     alert("スタンプ取得成功！");
     setIsVisited(true);
     if (modalImage) {
-      const index = isVisited ? 0 : 1;
-      setModalImage((prevImage) => {
-        const description = selectedFeature.getProperty("gx_media_links");
-        return description ? description[index] : prevImage;
-      });
+      setModalImage(description[1]);
     }
+    setIsVisited(true);
     router.refresh();
   };
 
